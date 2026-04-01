@@ -1,4 +1,39 @@
+/* ── Midnight Gala Theme Toggle ── */
+(function () {
+    const saved = localStorage.getItem('se_theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Theme toggle init
+    const toggle = document.getElementById('theme-toggle');
+    const icon   = document.getElementById('theme-icon');
+
+    function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('se_theme', theme);
+        if (icon) {
+            if (theme === 'dark') {
+                icon.className = 'fas fa-sun';
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.className = 'fas fa-moon';
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+    }
+
+    // Apply saved or system preference on load
+    const savedTheme = localStorage.getItem('se_theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    applyTheme(savedTheme);
+
+    toggle?.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+
     // 1. Mobile Menu Toggle
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
