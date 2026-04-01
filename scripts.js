@@ -120,4 +120,44 @@ document.addEventListener('DOMContentLoaded', () => {
         waBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
         document.body.appendChild(waBtn);
     }
+
+    // 7. Before / After Drag Sliders
+    document.querySelectorAll('.ba-slider').forEach(slider => {
+        let dragging = false;
+
+        function setPos(clientX) {
+            const rect = slider.getBoundingClientRect();
+            let pct = ((clientX - rect.left) / rect.width) * 100;
+            pct = Math.max(2, Math.min(98, pct));
+            const before = slider.querySelector('.ba-before');
+            const handle = slider.querySelector('.ba-handle');
+            // Clip the "before" image: show left `pct`% of it
+            before.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+            handle.style.left = `${pct}%`;
+        }
+
+        function onStart(e) {
+            dragging = true;
+            // Remove hint animation class once user interacts
+            slider.classList.remove('ba-hint');
+            const x = e.touches ? e.touches[0].clientX : e.clientX;
+            setPos(x);
+        }
+
+        function onMove(e) {
+            if (!dragging) return;
+            e.preventDefault();
+            const x = e.touches ? e.touches[0].clientX : e.clientX;
+            setPos(x);
+        }
+
+        function onEnd() { dragging = false; }
+
+        slider.addEventListener('mousedown',  onStart);
+        slider.addEventListener('touchstart', onStart, { passive: true });
+        window.addEventListener('mousemove',  onMove);
+        window.addEventListener('touchmove',  onMove, { passive: false });
+        window.addEventListener('mouseup',    onEnd);
+        window.addEventListener('touchend',   onEnd);
+    });
 });

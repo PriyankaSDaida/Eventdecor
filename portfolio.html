@@ -6,7 +6,122 @@
     <meta name="description" content="View our portfolio of premium weddings, traditional functions, and corporate events.">
     <title>Portfolio | Symphony Events</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2">
+    <style>
+    /* ── Before / After Slider — Inline Styles ── */
+    .ba-section {
+        background: #1a1a1e;
+        padding: 5rem 0;
+    }
+    .ba-section .section-title   { color: #fff; }
+    .ba-section .section-title span { color: #c39a4a; }
+    .ba-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 0;
+    }
+    @media (max-width: 900px) { .ba-grid { grid-template-columns: 1fr; } }
+    .ba-card { display: flex; flex-direction: column; gap: 0.8rem; }
+    .ba-card-label {
+        text-align: center;
+        font-family: 'Lora', serif;
+        font-style: italic;
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.5);
+    }
+    .ba-card-label strong {
+        font-style: normal;
+        font-family: 'Playfair Display', serif;
+        color: #c39a4a;
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 0.1rem;
+    }
+    /* THE KEY: explicit height on slider container */
+    .ba-slider {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        cursor: ew-resize;
+        user-select: none;
+        -webkit-user-select: none;
+        width: 100%;
+        height: 280px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        touch-action: none;
+    }
+    .ba-img {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
+        pointer-events: none !important;
+    }
+    .ba-before {
+        clip-path: inset(0 50% 0 0);
+        z-index: 2;
+    }
+    .ba-after { z-index: 1; }
+    .ba-label {
+        position: absolute;
+        top: 0.8rem;
+        z-index: 6;
+        padding: 0.2rem 0.7rem;
+        border-radius: 99px;
+        font-size: 0.68rem;
+        font-family: 'Lora', serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        pointer-events: none;
+        color: #fff;
+    }
+    .ba-label-before {
+        left: 0.8rem;
+        background: rgba(0,0,0,0.6);
+        border: 1px solid rgba(255,255,255,0.25);
+    }
+    .ba-label-after {
+        right: 0.8rem;
+        background: rgba(195,154,74,0.9);
+    }
+    .ba-handle {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 100%;
+        transform: translateX(-50%);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        pointer-events: none;
+    }
+    .ba-line {
+        width: 2px;
+        flex: 1;
+        background: rgba(255,255,255,0.95);
+        box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    }
+    .ba-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px; height: 44px;
+        border-radius: 50%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        color: #c39a4a;
+        font-size: 1rem;
+    }
+    </style>
 </head>
 <body data-page="portfolio">
 
@@ -118,6 +233,91 @@
         </div>
     </section>
 
+    <!-- Before / After Transformation Sliders -->
+    <section class="section ba-section">
+        <div class="container">
+            <div class="section-title">
+                <span>The Magic of Decoration</span>
+                <h2>Before &amp; After</h2>
+            </div>
+            <p style="text-align:center;color:rgba(255,255,255,0.55);font-style:italic;margin-top:-1.5rem;margin-bottom:2.5rem;">
+                Drag the handle left or right to reveal the transformation
+            </p>
+
+            <div class="ba-grid">
+
+                <!-- Pair 1: Wedding Mandap -->
+                <div class="ba-card">
+                    <div class="ba-slider ba-hint" id="ba-1">
+                        <span class="ba-label ba-label-before">Before</span>
+                        <span class="ba-label ba-label-after">After</span>
+                        <!-- After (decorated) — bottom layer -->
+                        <img class="ba-img ba-after"
+                             src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=900"
+                             alt="Decorated Wedding Mandap">
+                        <!-- Before (plain) — top layer, clipped -->
+                        <img class="ba-img ba-before"
+                             src="https://images.unsplash.com/photo-1519167758481-83f29c8a4aa9?auto=format&fit=crop&q=80&w=900"
+                             alt="Empty Venue Hall">
+                        <div class="ba-handle">
+                            <div class="ba-line"></div>
+                            <div class="ba-btn"><i class="fas fa-arrows-left-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="ba-card-label">
+                        <strong>Royal Wedding Mandap</strong>
+                        From bare banquet hall to a majestic floral sanctuary
+                    </div>
+                </div>
+
+                <!-- Pair 2: Reception -->
+                <div class="ba-card">
+                    <div class="ba-slider ba-hint" id="ba-2">
+                        <span class="ba-label ba-label-before">Before</span>
+                        <span class="ba-label ba-label-after">After</span>
+                        <img class="ba-img ba-after"
+                             src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=900"
+                             alt="Decorated Reception Hall">
+                        <img class="ba-img ba-before"
+                             src="https://images.unsplash.com/photo-1554629947-334ff61d85dc?auto=format&fit=crop&q=80&w=900"
+                             alt="Plain Outdoor Space">
+                        <div class="ba-handle">
+                            <div class="ba-line"></div>
+                            <div class="ba-btn"><i class="fas fa-arrows-left-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="ba-card-label">
+                        <strong>Crystal Reception Gala</strong>
+                        A bare space transformed into an evening of elegance
+                    </div>
+                </div>
+
+                <!-- Pair 3: Birthday -->
+                <div class="ba-card">
+                    <div class="ba-slider ba-hint" id="ba-3">
+                        <span class="ba-label ba-label-before">Before</span>
+                        <span class="ba-label ba-label-after">After</span>
+                        <img class="ba-img ba-after"
+                             src="https://images.unsplash.com/photo-1530103862676-de8892bf30fa?auto=format&fit=crop&q=80&w=900"
+                             alt="Decorated Birthday Party">
+                        <img class="ba-img ba-before"
+                             src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=900"
+                             alt="Plain Room">
+                        <div class="ba-handle">
+                            <div class="ba-line"></div>
+                            <div class="ba-btn"><i class="fas fa-arrows-left-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="ba-card-label">
+                        <strong>Enchanted Forest First Year</strong>
+                        Plain walls brought to life with whimsy and wonder
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -140,7 +340,48 @@
         </div>
     </footer>
 
-    <script src="scripts.js"></script>
-    <script src="site-data.js"></script>
+    <script src="scripts.js?v=2"></script>
+    <script src="site-data.js?v=2"></script>
+    <script>
+    // Before / After Slider — Inline Init (cache-safe)
+    (function() {
+        function initSliders() {
+            document.querySelectorAll('.ba-slider').forEach(function(slider) {
+                var dragging = false;
+                function setPos(clientX) {
+                    var rect = slider.getBoundingClientRect();
+                    var pct = ((clientX - rect.left) / rect.width) * 100;
+                    pct = Math.max(2, Math.min(98, pct));
+                    var before = slider.querySelector('.ba-before');
+                    var handle = slider.querySelector('.ba-handle');
+                    before.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+                    handle.style.left = pct + '%';
+                }
+                slider.addEventListener('mousedown', function(e) {
+                    dragging = true;
+                    setPos(e.clientX);
+                    e.preventDefault();
+                });
+                slider.addEventListener('touchstart', function(e) {
+                    dragging = true;
+                    setPos(e.touches[0].clientX);
+                }, { passive: true });
+                window.addEventListener('mousemove', function(e) {
+                    if (dragging) setPos(e.clientX);
+                });
+                window.addEventListener('touchmove', function(e) {
+                    if (dragging) { e.preventDefault(); setPos(e.touches[0].clientX); }
+                }, { passive: false });
+                window.addEventListener('mouseup',  function() { dragging = false; });
+                window.addEventListener('touchend', function() { dragging = false; });
+            });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSliders);
+        } else {
+            initSliders();
+        }
+    })();
+    </script>
 </body>
 </html>
