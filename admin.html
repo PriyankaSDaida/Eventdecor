@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | Symphony Events</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div class="login-wrap" id="login-wrap">
+  <div class="login-card">
+    <div class="login-logo">Symphony Events</div>
+    <p>Admin Portal — sign in to manage your site</p>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="login-user">Username</label>
+        <input type="text" id="login-user" placeholder="admin" required>
+      </div>
+      <div class="form-group">
+        <label for="login-pass">Password</label>
+        <input type="password" id="login-pass" placeholder="••••••••" required>
+      </div>
+      <div class="login-err" id="login-err"></div>
+      <button type="submit" class="btn-login"><i class="fas fa-lock"></i> &nbsp;Sign In</button>
+    </form>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div id="admin-app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      Symphony Events
+      <small>Admin Dashboard</small>
+    </div>
+    <nav>
+      <div class="nav-item active" data-page="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</div>
+      <div class="nav-item" data-page="portfolio"><i class="fas fa-images"></i> Portfolio</div>
+      <div class="nav-item" data-page="testimonials"><i class="fas fa-comments"></i> Testimonials</div>
+      <div class="nav-item" data-page="services"><i class="fas fa-concierge-bell"></i> Services</div>
+      <div class="nav-item" data-page="stats"><i class="fas fa-chart-bar"></i> Stats</div>
+      <div class="nav-item" data-page="about"><i class="fas fa-user-circle"></i> About Page</div>
+      <div class="nav-item" data-page="hero"><i class="fas fa-home"></i> Hero Section</div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.html" target="_blank" class="btn btn-ghost" style="width:100%;justify-content:center;margin-bottom:0.6rem;text-decoration:none">
+        <i class="fas fa-external-link-alt"></i> View Site
+      </a>
+      <button class="btn-logout" id="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- DASHBOARD -->
+    <section class="page-section active" id="page-dashboard">
+      <div class="page-header-bar">
+        <div><h1>Dashboard</h1><p>Welcome back! Here's a quick overview of your site content.</p></div>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-card">
+          <div class="dash-icon gold"><i class="fas fa-images"></i></div>
+          <div><div class="dash-num" id="dash-portfolio">—</div><div class="dash-label">Portfolio Items</div></div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-icon purple"><i class="fas fa-comments"></i></div>
+          <div><div class="dash-num" id="dash-testimonials">—</div><div class="dash-label">Testimonials</div></div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-icon blue"><i class="fas fa-concierge-bell"></i></div>
+          <div><div class="dash-num" id="dash-services">—</div><div class="dash-label">Services</div></div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-icon green"><i class="fas fa-calendar-check"></i></div>
+          <div><div class="dash-num" id="dash-events">—</div><div class="dash-label">Events Completed</div></div>
+        </div>
+      </div>
+      <div class="settings-card" style="background:linear-gradient(135deg,rgba(201,149,106,0.08),rgba(155,111,168,0.08));border-color:rgba(201,149,106,0.2)">
+        <h3 style="color:var(--text)">🔑 Login Credentials</h3>
+        <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:0.5rem">Use these to log back in:</p>
+        <p style="font-size:0.9rem"><strong>Username:</strong> admin &nbsp;|&nbsp; <strong>Password:</strong> symphony2024</p>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="page-section" id="page-portfolio">
+      <div class="page-header-bar">
+        <div><h1>Portfolio</h1><p>Manage your gallery of events and decoration work.</p></div>
+        <button class="btn btn-primary" onclick="openPortfolioModal()"><i class="fas fa-plus"></i> Add Item</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Image</th><th>Title</th><th>Category</th><th>Description</th><th>Actions</th></tr></thead>
+          <tbody id="portfolio-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="page-section" id="page-testimonials">
+      <div class="page-header-bar">
+        <div><h1>Testimonials</h1><p>Manage what happy clients say about you.</p></div>
+        <button class="btn btn-primary" onclick="openTestimonialModal()"><i class="fas fa-plus"></i> Add Testimonial</button>
+      </div>
+      <div class="testimonial-list" id="testimonials-list"></div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="page-section" id="page-services">
+      <div class="page-header-bar">
+        <div><h1>Services</h1><p>Edit the service cards shown on your homepage.</p></div>
+        <button class="btn btn-primary" onclick="openServiceModal()"><i class="fas fa-plus"></i> Add Service</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Icon</th><th>Title</th><th>Description</th><th>Actions</th></tr></thead>
+          <tbody id="services-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="page-section" id="page-stats">
+      <div class="page-header-bar">
+        <div><h1>Site Stats</h1><p>Update the numbers displayed on your homepage.</p></div>
+      </div>
+      <div class="settings-card">
+        <h3>Trust Statistics</h3>
+        <form id="stats-form">
+          <div class="stats-edit-grid">
+            <div class="stat-edit-item">
+              <label>Events Completed</label>
+              <input type="number" id="stat-events" min="0">
+            </div>
+            <div class="stat-edit-item">
+              <label>Happy Clients</label>
+              <input type="number" id="stat-clients" min="0">
+            </div>
+            <div class="stat-edit-item">
+              <label>Years of Elegance</label>
+              <input type="number" id="stat-years" min="0">
+            </div>
+          </div>
+          <div style="margin-top:1.2rem">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Stats</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="page-section" id="page-about">
+      <div class="page-header-bar">
+        <div><h1>About Page</h1><p>Edit your personal story and founder image.</p></div>
+      </div>
+      <div class="settings-card">
+        <h3>Our Story Content</h3>
+        <form id="about-form">
+          <div class="form-group">
+            <label>Section Heading</label>
+            <input type="text" id="about-heading">
+          </div>
+          <div class="form-group">
+            <label>Story Body (paragraphs separated by blank lines)</label>
+            <textarea id="about-body" rows="10"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Founder Image URL</label>
+            <input type="url" id="about-img" placeholder="https://...">
+          </div>
+          <img id="about-img-preview" style="width:120px;height:90px;object-fit:cover;border-radius:8px;margin-top:0.5rem;border:1px solid var(--border)" alt="Preview">
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save About Page</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- HERO -->
+    <section class="page-section" id="page-hero">
+      <div class="page-header-bar">
+        <div><h1>Hero Section</h1><p>Update the main headline and tagline on your homepage.</p></div>
+      </div>
+      <div class="settings-card">
+        <h3>Homepage Hero Text</h3>
+        <form id="hero-form">
+          <div class="form-group">
+            <label>Main Headline</label>
+            <input type="text" id="hero-title">
+          </div>
+          <div class="form-group">
+            <label>Subtitle / Tagline</label>
+            <input type="text" id="hero-subtitle">
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Hero</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ── MODALS ── -->
+
+<!-- Portfolio Modal -->
+<div class="modal-overlay" id="portfolio-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="portfolio-modal-title">Add Portfolio Item</h2>
+      <button class="modal-close" onclick="closePortfolioModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <form id="portfolio-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Title *</label>
+          <input type="text" id="pm-title" required placeholder="The Royal Jaipur Affair">
+        </div>
+        <div class="form-group">
+          <label>Category *</label>
+          <select id="pm-category">
+            <option value="weddings">Weddings</option>
+            <option value="birthdays">Birthdays</option>
+            <option value="baby-showers">Baby Showers</option>
+            <option value="traditional">Traditional Functions</option>
+            <option value="corporate">Corporate</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Short Description</label>
+        <textarea id="pm-desc" rows="2" placeholder="A brief caption for this event…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Image URL *</label>
+        <input type="url" id="pm-img" placeholder="https://images.unsplash.com/..." required>
+      </div>
+      <img id="pm-img-preview" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:1rem;display:none;border:1px solid var(--border)" alt="Preview">
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closePortfolioModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Testimonial Modal -->
+<div class="modal-overlay" id="testimonial-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="testimonial-modal-title">Add Testimonial</h2>
+      <button class="modal-close" onclick="closeTestimonialModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <form id="testimonial-form">
+      <div class="form-group">
+        <label>Client Name *</label>
+        <input type="text" id="tm-author" required placeholder="Anjali & Vikram Desai">
+      </div>
+      <div class="form-group">
+        <label>Testimonial Text *</label>
+        <textarea id="tm-text" rows="4" required placeholder='"Their decor was absolutely breathtaking…"'></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeTestimonialModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Service Modal -->
+<div class="modal-overlay" id="service-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="service-modal-title">Add Service</h2>
+      <button class="modal-close" onclick="closeServiceModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <form id="service-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Title *</label>
+          <input type="text" id="sm-title" required placeholder="Weddings">
+        </div>
+        <div class="form-group">
+          <label>Font Awesome Icon Class</label>
+          <input type="text" id="sm-icon" placeholder="fa-rings">
+          <small style="color:var(--text-muted);font-size:0.75rem">e.g. fa-rings, fa-birthday-cake, fa-star</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description *</label>
+        <textarea id="sm-desc" rows="3" required placeholder="Describe this service…"></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeServiceModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>
