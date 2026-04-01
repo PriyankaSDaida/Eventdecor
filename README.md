@@ -4,10 +4,11 @@
   <img src="https://img.shields.io/badge/status-live-brightgreen?style=for-the-badge" alt="Status: Live" />
   <img src="https://img.shields.io/badge/stack-Vanilla%20HTML%20%2F%20CSS%20%2F%20JS-gold?style=for-the-badge" alt="Tech Stack" />
   <img src="https://img.shields.io/badge/admin-portal%20included-blueviolet?style=for-the-badge" alt="Admin Portal" />
-  <img src="https://img.shields.io/badge/responsive-yes-blue?style=for-the-badge" alt="Responsive" />
+  <img src="https://img.shields.io/badge/dark%20mode-Midnight%20Gala-1a1a1e?style=for-the-badge&logo=moon" alt="Dark Mode" />
+  <img src="https://img.shields.io/badge/branch-enhancement--V1-orange?style=for-the-badge" alt="Branch" />
 </p>
 
-> A fully responsive, luxury-grade event decoration company website built with Vanilla HTML, CSS & JavaScript — complete with a **built-in Admin Portal** for managing all site content without touching any code.
+> A fully responsive, luxury-grade event decoration company website built with Vanilla HTML, CSS & JavaScript — complete with a **built-in Admin Portal**, an interactive **Before & After drag-to-reveal slider**, and a **"Midnight Gala" dark mode** toggle.
 
 ---
 
@@ -15,6 +16,7 @@
 
 - [About the Project](#-about-the-project)
 - [Pages & Features](#-pages--features)
+- [✨ Enhancements (v1)](#-enhancements-v1)
 - [Admin Portal](#-admin-portal)
 - [How Content Updates Work](#-how-content-updates-work)
 - [Design System](#-design-system)
@@ -37,7 +39,7 @@
 - 🪢 Cradle Ceremonies & Traditional Functions
 - 🏆 Corporate Galas & Award Nights
 
-The website is crafted to evoke **luxury, emotion, and trust** — immediately converting visitors into clients through editorial typography, warm gold accents, and cinematic photography. All content is editable through the built-in admin portal — no coding required.
+The website is crafted to evoke **luxury, emotion, and trust** — immediately converting visitors into clients through editorial typography, warm gold accents, and cinematic photography. All content is editable through the built-in admin portal — no coding required. The site now includes two premium interactive enhancements: a **drag-to-reveal Before & After slider** on the portfolio page and a site-wide **"Midnight Gala" dark mode**.
 
 ---
 
@@ -58,6 +60,7 @@ The website is crafted to evoke **luxury, emotion, and trust** — immediately c
 - All portfolio items rendered from admin-managed data
 - Hover zoom on images, category badges, titles, and descriptions
 - WhatsApp CTA for viewing the full catalog
+- 🆕 **Before & After drag-to-reveal transformation slider** (3 showcases) — see [Enhancements v1](#-enhancements-v1)
 
 ### 💛 `about.html` — Our Story Page
 - Founder biography rendered dynamically from admin-saved content
@@ -73,6 +76,63 @@ The website is crafted to evoke **luxury, emotion, and trust** — immediately c
 | **Success State** | Form fades out and shows "Request Received" confirmation on submit |
 | **Contact Sidebar** | Phone/WhatsApp links, email, studio address, and business hours |
 | **Google Maps Embed** | Studio location embed for Bengaluru |
+
+---
+
+## ✨ Enhancements (v1)
+
+> Branch: `enhancement-V1` — committed and pushed to GitHub.
+
+### 🎭 Before & After Drag-to-Reveal Slider
+
+An interactive section at the bottom of `portfolio.html` showcasing three real event transformations — from an empty/plain venue to a fully decorated setup.
+
+**How it works:**
+- Each slider contains two absolutely positioned images stacked on top of each other
+- The **"Before"** image is clipped using `clip-path: inset()`, masking the right portion
+- Dragging/touching the **↔ handle** updates the `clip-path` in real-time, revealing the "After" image
+- The divider line and circular handle track the cursor precisely
+
+**Three showcases:**
+| Card | Before → After |
+|---|---|
+| Royal Wedding Mandap | Bare banquet hall → Majestic floral sanctuary |
+| Crystal Reception Gala | Empty hall → Evening of elegance |
+| Enchanted Forest First Year | Plain walls → Whimsy and wonder |
+
+**Technical details:**
+- CSS: `position: absolute` + `height: 280px` on `.ba-slider` for reliable overlay geometry
+- JS: Mouse and touch events with `clip-path: inset(0 X% 0 0)` for smooth, performant reveal
+- Inline `<style>` and `<script>` in `portfolio.html` to bypass browser CSS caching
+- Labels: **BEFORE** (dark pill) and **AFTER** (gold pill) positioned at top corners
+
+---
+
+### 🌙 Midnight Gala — Dark Mode
+
+A site-wide dark mode accessible via a **moon/sun toggle button** in the navigation bar of every page.
+
+**Toggle:** Click the `🌙` circle button between the nav links and hamburger icon.
+
+**Palette:**
+| Token | Light Mode | Dark Mode (Midnight Gala) |
+|---|---|---|
+| `--bg-color` | `#fdfcfb` | `#1a1a1e` (deep charcoal) |
+| `--secondary-peach` | `#f4ebe3` | `#22222c` (dark charcoal) |
+| `--text-dark` | `#2c2a29` | `#ede9e2` (cream white) |
+| `--text-muted` | `#5e5a57` | `#9c9390` (warm grey) |
+| `--primary-gold` | `#c39a4a` | `#c9a55a` (warm gold) |
+| Card surfaces | `#ffffff` | `#25252f` (elevated charcoal) |
+
+**Features:**
+- 🔄 **Smooth 0.35s transitions** — backgrounds, text, borders, and shadows all cross-fade
+- 💾 **localStorage persistence** (`se_theme`) — dark mode survives page navigation and browser restarts
+- 🖥️ **System preference detection** — auto-applies OS dark mode on first visit if no saved preference
+- ⚡ **Anti-FOUC** — an inline script in every page's `<head>` applies the saved theme *before* any CSS renders, eliminating the "flash of white"
+- 🎨 **Gold + charcoal aesthetic** — cards get subtle gold borders; buttons invert to charcoal-on-gold; the nav frosted glass deepens
+
+**Covered elements:**
+Services cards · Process steps · Portfolio cards · Filter buttons · Testimonial cards · Contact form · Contact sidebar · Form inputs (background, border, placeholder) · Footer · Mobile nav dropdown · Social links · About section
 
 ---
 
@@ -145,7 +205,7 @@ site-data.js (included on every public page)
 
 ## 🎨 Design System
 
-### Color Palette
+### Light Mode Color Palette
 | Token | Hex | Usage |
 |---|---|---|
 | `--primary-gold` | `#c39a4a` | Buttons, active links, accents, icons |
@@ -155,6 +215,17 @@ site-data.js (included on every public page)
 | `--text-dark` | `#2c2a29` | Headings, primary text |
 | `--text-muted` | `#5e5a57` | Body paragraphs, descriptions |
 | `--whatsapp` | `#25D366` | WhatsApp float button & links |
+
+### 🌙 Dark Mode (Midnight Gala) Color Palette
+| Token | Hex | Usage |
+|---|---|---|
+| `--bg-color` | `#1a1a1e` | Main page background (deep charcoal) |
+| `--secondary-peach` | `#22222c` | Alternate section backgrounds |
+| `--text-dark` | `#ede9e2` | Headings & primary text (warm cream) |
+| `--text-muted` | `#9c9390` | Body text & descriptions (warm grey) |
+| `--primary-gold` | `#c9a55a` | Buttons, accents (slightly warmer gold) |
+| Card Surface | `#25252f` | Service/testimonial/portfolio cards |
+| Footer | `#111115` | Deep footer background |
 
 ### Admin Portal Color Palette (Dark Theme)
 | Token | Value | Usage |
@@ -177,6 +248,8 @@ site-data.js (included on every public page)
 - **Parallax Hero**: `background-attachment: fixed` creates depth on the hero and stats sections
 - **Bouncing Scroll Arrow**: Continuously bouncing chevron on the homepage hero
 - **Glassmorphism Navbar**: Transitions from transparent to frosted `backdrop-filter: blur(10px)` on scroll
+- **Theme Toggle Spin**: Moon icon rotates 180° to reveal sun icon on dark mode activation
+- **BA Slider Handle**: Circular ↔ handle tracks drag position with `clip-path` animation at 60fps
 
 ---
 
@@ -186,12 +259,14 @@ site-data.js (included on every public page)
 event_decorator_site/
 │
 ├── 📄 index.html         # Home — Hero, Services, Gallery, Stats, Testimonials
-├── 📄 portfolio.html     # Portfolio gallery with JS category filtering
+├── 📄 portfolio.html     # Portfolio gallery, JS filter + Before/After slider
 ├── 📄 about.html         # Founder's story & biography
 ├── 📄 contact.html       # Booking inquiry form, contact info, Google Maps
 │
-├── 🎨 styles.css         # Global design system: variables, layout, animations, responsive
-├── ⚡ scripts.js         # Scroll effects, counter animation, mobile nav, WhatsApp button
+├── 🎨 styles.css         # Global design system: variables, layout, animations,
+│                         # responsive breakpoints, dark mode (Midnight Gala)
+├── ⚡ scripts.js         # Scroll effects, counter, mobile nav, BA slider logic,
+│                         # Midnight Gala theme toggle + localStorage persistence
 ├── 🔄 site-data.js       # Reads localStorage and dynamically updates all public pages
 │
 ├── 🛠️ admin.html         # Admin portal — content management dashboard (login required)
@@ -208,12 +283,12 @@ event_decorator_site/
 | Technology | Purpose |
 |---|---|
 | **HTML5** | Semantic page structure (header, nav, main, section, footer) |
-| **CSS3 (Vanilla)** | Design system with CSS variables, Flexbox, Grid, Keyframe animations, Media Queries |
-| **JavaScript (ES6+)** | IntersectionObserver, counter animation, portfolio filter, admin CRUD, localStorage |
+| **CSS3 (Vanilla)** | Design system with CSS custom properties, Flexbox, Grid, Keyframe animations, Media Queries, `clip-path` for BA slider, `[data-theme]` attribute for dark mode |
+| **JavaScript (ES6+)** | IntersectionObserver, counter animation, portfolio filter, BA slider drag events, theme toggle + localStorage, admin CRUD |
 | **Google Fonts** | Playfair Display, Lora (public site) + Inter (admin portal) |
 | **FontAwesome 6** | All icons across public site and admin portal |
 | **Google Maps Embed** | Studio location on Contact page |
-| **localStorage API** | Persistent content storage between admin and public pages |
+| **localStorage API** | Persistent content storage (admin data + theme preference) |
 
 > ✅ **Zero dependencies** — No Node.js, no npm packages, no build pipeline required.
 
@@ -233,6 +308,8 @@ event_decorator_site/
 - Images served from Unsplash CDN with quality and width parameters (`?q=80&w=800`)
 - Google Maps iframe uses `loading="lazy"` to defer loading
 - Web Fonts loaded via Google Fonts CDN with `display=swap` for zero layout shift
+- Dark mode toggle uses **CSS custom properties** — no layout recalculation on theme switch
+- Anti-FOUC inline script prevents any white flash when loading in dark mode
 
 ---
 
@@ -305,11 +382,15 @@ vercel --prod
 - [ ] **Backend Integration** — Replace localStorage with Firebase/Supabase for multi-device admin sync
 - [ ] **Image Upload** — Allow direct file uploads from admin instead of pasting URLs
 - [ ] **Role-Based Access** — Multiple admin users with different permission levels
-- [ ] **Before & After Slider** — Drag-to-reveal portfolio image transformations
-- [ ] **Dark Mode ("Midnight Gala")** — Moon/sun toggle with a charcoal + gold aesthetic
 - [ ] **Cinematic Video Hero** — Looping, muted ambient video background on homepage
 - [ ] **Live Instagram Feed Grid** — Auto-updating social proof grid above the footer
 - [ ] **Admin Change History** — Audit log of all content edits with timestamps
+- [ ] **Booking Calendar** — Availability calendar with date-blocking for confirmed events
+- [ ] **Multi-Language Support** — English / Kannada / Hindi toggle for regional reach
+
+### ✅ Shipped in `enhancement-V1`
+- [x] **Before & After Slider** — Drag-to-reveal portfolio image transformations (3 showcases)
+- [x] **Dark Mode ("Midnight Gala")** — Moon/sun toggle with charcoal `#1a1a1e` + gold aesthetic, system preference detection, anti-FOUC, full `localStorage` persistence
 
 ---
 
