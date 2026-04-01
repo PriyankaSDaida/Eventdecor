@@ -1,4 +1,4 @@
-# 🌸 Symphony Events — Premium Event Decoration Website
+# 🌸 Decor By P — Premium Event Decoration Website
 
 <p align="center">
   <img src="https://img.shields.io/badge/status-live-brightgreen?style=for-the-badge" alt="Status: Live" />
@@ -32,7 +32,7 @@
 
 ## 🌟 About the Project
 
-**Symphony Events** is a premium digital presence for an event decoration company specializing in:
+**Decor By P** is a premium digital presence for an event decoration company specializing in:
 
 - 💍 Weddings & Receptions
 - 🎂 Birthdays & Baby Showers
@@ -364,7 +364,7 @@ Username: admin  |  Password: symphony2024
 ### Deploy to Netlify _(Drag & Drop — Recommended)_
 1. Go to [netlify.com](https://netlify.com) and sign in
 2. Drag and drop the `event_decorator_site/` folder into the dashboard
-3. Site is instantly live — connect a custom domain (e.g., `www.symphonyevents.in`)
+3. Site is instantly live — connect a custom domain (e.g., `www.decorbype.in`)
 
 ### Deploy to Vercel
 ```bash
@@ -397,9 +397,9 @@ vercel --prod
 ## 📞 Business Contact
 
 - **WhatsApp**: [+91 80953 35050](https://wa.me/8095335050)
-- **Email**: hello@symphonyevents.com
+- **Email**: hello@decorbype.com
 - **Location**: Bengaluru, India
 
 ---
 
-<p align="center">Made with ❤️ for Symphony Events &mdash; <em>Crafting Unforgettable Moments</em></p>
+<p align="center">Made with ❤️ for Decor By P &mdash; <em>Crafting Unforgettable Moments</em></p>
